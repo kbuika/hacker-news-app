@@ -154,7 +154,7 @@ function App() {
           type='text'
           value={''}
           onChange={event => setQuery(event.target.value)}
-          placeholder='Search for a topic'
+          placeholder='Search for a topic..eg(GPT-3)'
         />
         <Button type='button' onClick={() => 
             setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)

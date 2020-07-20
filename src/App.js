@@ -53,6 +53,7 @@ const Button = styled.button`
 `;
 
 const ContentDiv = styled.div`
+  margin-top: 1em;
   height: auto;
   width: auto;
 `;
@@ -152,9 +153,9 @@ function App() {
       <SearchDiv>
         <Input 
           type='text'
-          value={''}
+          value={query}
           onChange={event => setQuery(event.target.value)}
-          placeholder='Search for a topic..eg(GPT-3)'
+          
         />
         <Button type='button' onClick={() => 
             setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)

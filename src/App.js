@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Pagination from 'rc-pagination';
 
 import styled from 'styled-components';
 
@@ -116,6 +117,27 @@ const Title = styled.h1`
   font-weight: 800;
 `;
 
+const Footer = styled.p`
+  font-size: 1em;
+  font-weight: 600;
+  bottom: 1px;
+  text-align: center;
+`;
+
+const NameLink = styled.a`
+  text-decoration: none;
+  color: black;
+
+  :hover {
+    text-decoration: none;
+    color: blue;
+  }
+`;
+
+const Loading = styled.div`
+  height: 50vh;
+`;
+
 
 
 function App() {
@@ -151,7 +173,7 @@ function App() {
 
   return (
     <MainDiv>
-        <center><Title>Hacker News</Title></center>
+        <center><Title>Hacker News</Title>*Search anything techie...</center>
       <SearchDiv>
         <Input 
           type='text'
@@ -166,22 +188,23 @@ function App() {
       <ContentDiv>
         {isError && <div>Something went wrong ...</div>}
         {isLoading ? (
-          <div>Loading...</div>
+          <Loading>Loading...</Loading>
         ) : (
           <CardsDiv>
             {data.hits.map(item => (
-              <Link href={item.url} target='_blank' key={item.objectID}>
-                <Card key={item.objectID}>
-                  <CardContent>
-                    <CardTitle>{item.title}</CardTitle>
-                    <ReadMore href={item.url} target='_blank'>Read More &#8594;</ReadMore>
-                  </CardContent>
-                </Card>
-              </Link>
+                <Link href={item.url} target='_blank' key={item.objectID}>
+                  <Card>
+                    <CardContent>
+                      <CardTitle>{item.title}</CardTitle>
+                      <ReadMore href={item.url} target='_blank'>Read More &#8594;</ReadMore>
+                    </CardContent>
+                  </Card>
+                </Link>
             ))}
           </CardsDiv>
         )}
       </ContentDiv>
+      <Footer>Made with &#10084; by <NameLink href='https://kibuika.netlify.app/'>Steve Kibuika</NameLink></Footer>
     </MainDiv>
   )
 }

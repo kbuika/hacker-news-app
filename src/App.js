@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Pagination from 'rc-pagination';
-
 import styled from 'styled-components';
+
 
 const MainDiv = styled.div`
   height: auto;
-  width: auto;
   padding: 3em;
   display: flex;
   flex-flow: column nowrap;

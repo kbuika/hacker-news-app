@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const MainDiv = styled.div`
   height: auto;
-  padding: 3em;
+  padding: 2em;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -26,9 +26,12 @@ const Input = styled.input`
   height: 3em;
   width: 20em;
   border-radius: 18px;
-  border: .5px solid black;
+  border: none;
   padding-left: 1em;
   font-size: .8em;
+  -webkit-box-shadow: -2px 2px 8px 0px rgba(0,0,0,0.74);
+  -moz-box-shadow: -2px 2px 8px 0px rgba(0,0,0,0.74);
+  box-shadow: -2px 2px 8px 0px rgba(0,0,0,0.74);
 
   :focus {
     outline: none;
@@ -53,6 +56,7 @@ const Button = styled.button`
 
 const ContentDiv = styled.div`
   height: auto;
+  margin-top: .5em;
 `;
 
 const CardsDiv = styled.div`
@@ -138,6 +142,7 @@ const Loading = styled.div`
 
 
 
+
 function App() {
   const [data, setData] = useState({ hits: []});
   const [query, setQuery] = useState("gpt-3");
@@ -184,7 +189,7 @@ function App() {
         >Search</Button>
       </SearchDiv>
       <ContentDiv>
-        {isError && <div>Something went wrong ...</div>}
+        {isError && <Loading>Something went wrong ...</Loading>}
         {isLoading ? (
           <Loading>Loading...</Loading>
         ) : (

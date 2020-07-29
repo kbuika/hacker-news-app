@@ -15,7 +15,7 @@ const MainDiv = styled.div`
 `;
 
 const SearchDiv = styled.div`
-  height: 20vh;
+  height: 10vh;
   width: auto;
   display: flex;
   flex-flow: row wrap;
@@ -53,14 +53,11 @@ const Button = styled.button`
 `;
 
 const ContentDiv = styled.div`
-  margin-top: 1em;
   height: auto;
-  width: auto;
 `;
 
 const CardsDiv = styled.div`
   height: auto;
-  width: 90%;
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -71,7 +68,7 @@ const CardsDiv = styled.div`
 const Card = styled.div`
   height: auto;
   width: 16em;
-  border: 1px solid black;
+  border: none;
   border-radius: 5px;
   margin: .5em;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
@@ -98,7 +95,7 @@ const CardTitle = styled.h3`
   color: black;
 `;
 
-const ReadMore = styled.a`
+const ReadMore = styled.p`
   margin: .5em;
   text-decoration: none;
   color: gray;
@@ -115,7 +112,7 @@ const Link = styled.a`
 `;
 
 const Title = styled.h1`
-  font-size: 2.5em;
+  font-size: 3em;
   font-weight: 800;
 `;
 
@@ -129,6 +126,11 @@ function App() {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+
+  const changeQuery = event => {
+    setQuery(event.target.value);
+    setUrl(`https://hn.algolia.com/api/v1/search?query=${query}`);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -154,11 +156,10 @@ function App() {
         <Input 
           type='text'
           value={query}
-          onChange={event => setQuery(event.target.value)}
-          
+          onChange={changeQuery}
         />
         <Button type='button' onClick={() => 
-            setUrl(`http://hn.algolia.com/api/v1/search?query=${query}`)
+            setUrl(`https://hn.algolia.com/api/v1/search?query=${query}`)
           }
         >Search</Button>
       </SearchDiv>
@@ -169,7 +170,7 @@ function App() {
         ) : (
           <CardsDiv>
             {data.hits.map(item => (
-              <Link href={item.url} target='_blank'>
+              <Link href={item.url} target='_blank' key={item.objectID}>
                 <Card key={item.objectID}>
                   <CardContent>
                     <CardTitle>{item.title}</CardTitle>
